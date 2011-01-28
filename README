@@ -3,3 +3,20 @@ README
 
 This is a simple toolbox of graphtools, implemented in C.
 
+JSON SYNTAX
+================================================================================
+{
+    "oriented" = true,
+
+    "nodes": {
+        "id1": {},
+        "id2": {"color": }
+    },
+
+    "edges":[{"start": "id1",
+              "stop": "id2",
+              "capacity": ...
+              "cost": ...
+              }, ...]
+}
+
