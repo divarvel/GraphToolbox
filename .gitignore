@@ -1,0 +1,10 @@
+# Binaries and stuff
+obj/*
+!obj/.keep
+bin/*
+!bin/.keep
+
+# Editor tmp files
+*~
+.*.swp
+.*.swo
