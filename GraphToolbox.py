@@ -4,6 +4,7 @@
 
 import sys, os, json
 from optparse import OptionParser
+
 class Graph(object):
     """ A graph object, and the algos we can apply on it """
     def __init__(self):
@@ -16,6 +17,21 @@ class Graph(object):
         " Find the shortest path between two nodes "
         pass
 
+    def max_flow(self, start, end):
+        " Compute the maximum flow between two nodes "
+        pass
+
+    def max_flow_min_cost(self, start, end):
+        " Compute the maximum flow with minimal cost between two nodes "
+        pass
+
+    def transitive_closure(self):
+        " Update the graph to be its transitive closure "
+        pass
+
+	def k_coloring(self, n):
+		" Color the graph with n color "
+		pass
 
 class GraphToolbox(object):
     """Implement some well known graph-related algos"""
@@ -31,7 +47,7 @@ class GraphToolbox(object):
         if len(args) > 1:
             action = args[1]
             if action == "path":
-                if len(args) >=3:
+                if len(args) >= 4:
                     # Shortest path between 2 nodes
                     print "Shortest path between %s and %s" % (args[2], args[3])
                     path = self.graph.shortest_path(args[2], args[3])
