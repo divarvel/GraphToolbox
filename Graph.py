@@ -14,23 +14,24 @@ class Graph(object):
 
     def shortest_path(self, start, end):
         """Find the shortest path between nodes start and end
-		Returns [start, node1, node2, ..., end]"""
+        Returns [start, node1, node2, ..., end]"""
         pass
 
     def max_flow(self, start, end):
         """Compute the maximum flow between nodes start and end
-		Returns maximum_flow"""
+        Returns maximum_flow"""
         pass
 
     def max_flow_min_cost(self, start, end):
         """Compute the maximum flow with minimum cost between nodes start and end
-		Returns (maximum_flow, minimum_cost)"""
+        Returns (maximum_flow, minimum_cost)"""
         pass
 
     def transitive_closure(self):
         " Update the graph to be its transitive closure "
         pass
 
-	def k_coloring(self, n):
-		" Color the graph with n color "
-		pass
+
+    def k_coloring(self, n):
+        " Color the graph with n color "
+        pass
