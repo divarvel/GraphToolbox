@@ -1,0 +1,14 @@
+{
+    "oriented": true,
+
+    "nodes": {
+        "id1": {},
+        "id2": {"color": 1}
+    },
+
+    "edges": [{"start": "id1",
+              "stop": "id2",
+              "capacity": 1,
+              "cost": 3
+              }]
+}
