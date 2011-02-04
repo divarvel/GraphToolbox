@@ -8,13 +8,13 @@ JSON SYNTAX
 {
     "oriented" = true,
 
-    "nodes": {
-        "id1": {},
-        "id2": {"color": }
-    },
+    "nodes": [
+        {},
+        {"color": }
+    ],
 
-    "edges":[{"start": "id1",
-              "stop": "id2",
+    "edges":[{"start": 0,
+              "stop": 1,
               "capacity": ...
               "cost": ...
               }, ...]
