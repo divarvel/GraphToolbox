@@ -27,9 +27,10 @@ class Graph(object):
         Return JSON datas"""
         data = {"oriented": self.directed, "nodes": self.nodes, "edges": []}
 
-        for start_line in self.edges:
-            for edge in start_line:
-                data["edges"].append(edge)
+        for start in self.nodes:
+            for stop in self.nodes:
+                if self.edges[start][stop] != {}:
+                    data["edges"].append(self.edges[start][stop])
 
         return data
 
