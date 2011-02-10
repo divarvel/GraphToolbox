@@ -27,10 +27,47 @@ class Graph(object):
         Returns [start, node1, node2, ..., end]"""
         pass
 
-    def max_flow(self, start, end):
+    def max_flow(self, start, stop):
         """Compute the maximum flow between nodes start and end
         Returns maximum_flow"""
-        pass
+
+        for start_id in self.edges:
+            for stop_id in self.edges:
+                if self.edges[start_id][stop_id] != {} \
+                   and not self.edges[start_id][stop_id].has_key("flow"):
+                    self.edges[start_id][stop_id]["flow"] = 0;
+
+        self.nodes[start]["marked"] = "+"
+
+        path = self._max_flow_find_path(start, stop, [])
+        while path != None:
+            flow = min(remaining_capacity for (edge, remaining_capacity) in path)
+            for (edge, remaining_capacity) in path:
+                edge["flow"] += flow
+                if self.edges[edge["stop"]][edge["start"]] == {}:
+                    self.edges[edge["stop"]][edge["start"]]["flow"] = 0
+                    self.edges[edge["stop"]][edge["start"]]["capacity"] = -edge["capacity"]
+                self.edges[edge["stop"]][edge["start"]]["flow"] -= flow
+            path = self._max_flow_find_path(start, stop, [])
+
+    def _max_flow_find_path(self, start, stop, path):
+        if start == stop:
+            return path
+
+        for node_id in self.edges[start]:
+            if self.edges[start][node_id] != {}:
+                edge = self.edges[start][node_id]
+                remaining_capacity = edge["capacity"] - edge["flow"]
+                if remaining_capacity > 0 \
+                   and not (edge, remaining_capacity) in path:
+                    new_path = self._max_flow_find_path(node_id,
+                                                        stop,
+                                                        path +
+                                                        [(edge, remaining_capacity)])
+
+                    if new_path != None:
+                        return new_path
+
 
     def max_flow_min_cost(self, start, end):
         """Compute the maximum flow with minimum cost between nodes start and end

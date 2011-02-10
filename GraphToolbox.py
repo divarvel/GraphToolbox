@@ -25,6 +25,21 @@ class GraphToolbox(object):
                     # Shortest path between 2 nodes
                     print "Shortest path between %s and %s" % (args[2], args[3])
                     path = self.graph.shortest_path(args[2], args[3])
+            elif action == "maxflow":
+                if len(args) >= 4:
+                    # Maximum flow between two nodes
+                    print "Compute maximum flow between %s and %s" % (args[2],
+                                                                     args[3])
+                    self.graph.max_flow(args[2], args[3])
+
+                    for start in self.graph.edges:
+                        for stop in self.graph.edges:
+                            edge = self.graph.edges[start][stop]
+
+                            if edge != {} and edge["flow"] >= 0:
+                                print "(%s %s) %s"  % (start,
+                                                       stop,
+                                                       edge["flow"])
 
     def _load_graph(self, path):
         " Create a new graph from the input file "
