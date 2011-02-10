@@ -54,8 +54,7 @@ class Graph(object):
         for k in self.nodes:
             for i in self.nodes:
                 for j in self.nodes:
-                    if self.edges[i][j] != {} or\
-                       (self.edges[i][k] != {} and self.edges[k][j] != {}):
+                    if self.edges[i][k] != {} and self.edges[k][j] != {}:
                         self.edges[i][j]["start"] = i
                         self.edges[i][j]["stop"] = j
                         self.edges[i][j]["capacity"] = 0

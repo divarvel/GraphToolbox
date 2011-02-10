@@ -27,6 +27,7 @@ class GraphToolbox(object):
                     path = self.graph.shortest_path(args[2], args[3])
             elif action == "closure":
                 print "Transitive closure"
+                self.graph.transitive_closure()
 
     def _load_graph(self, path):
         " Create a new graph from the input file "
