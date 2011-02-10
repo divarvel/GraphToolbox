@@ -12,11 +12,14 @@ class Graph(object):
         " OOo style: load Data "
         self.graph = data
         self.edges = {}
-        for edge in self.graph["edges"]:
-            self.edges[edge["start"]] = {}
-            self.edges[edge["start"]][edge["stop"]] = edge
 
-        print self.edges["id1"]["id2"]
+        for start in self.graph["nodes"]:
+            self.edges[start] = {}
+            for stop in self.graph["nodes"]:
+                self.edges[start][stop] = {}
+
+        for edge in self.graph["edges"]:
+            self.edges[edge["start"]][edge["stop"]] = edge
 
     def shortest_path(self, start, end):
         """Find the shortest path between nodes start and end
@@ -36,6 +39,10 @@ class Graph(object):
     def transitive_closure(self):
         " Update the graph to be its transitive closure "
         pass
+        for node in self.graph.nodes:
+            for edge in self.graph.edges:
+                if edge.start == node:
+                    pass
 
 
     def k_coloring(self, n):
