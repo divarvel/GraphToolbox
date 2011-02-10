@@ -3,11 +3,17 @@
 
     "nodes": {
         "id1": {},
-        "id2": {"color": 1}
+        "id2": {},
+        "id3": {}
     },
 
     "edges": [{"start": "id1",
               "stop": "id2",
+              "capacity": 1,
+              "cost": 3
+              },
+              {"start": "id2",
+              "stop": "id3",
               "capacity": 1,
               "cost": 3
               }]

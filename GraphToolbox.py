@@ -40,6 +40,9 @@ class GraphToolbox(object):
                                 print "(%s %s) %s"  % (start,
                                                        stop,
                                                        edge["flow"])
+            elif action == "closure":
+                print "Transitive closure"
+                self.graph.transitive_closure()
 
     def _load_graph(self, path):
         " Create a new graph from the input file "

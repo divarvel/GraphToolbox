@@ -22,6 +22,18 @@ class Graph(object):
         for edge in data["edges"]:
             self.edges[edge["start"]][edge["stop"]] = edge
 
+    def write_data(self):
+        """Build a JSON representation of the graph
+        Return JSON datas"""
+        data = {"oriented": self.directed, "nodes": self.nodes, "edges": []}
+
+        for start in self.nodes:
+            for stop in self.nodes:
+                if self.edges[start][stop] != {}:
+                    data["edges"].append(self.edges[start][stop])
+
+        return data
+
     def shortest_path(self, start, end):
         """Find the shortest path between nodes start and end
         Returns [start, node1, node2, ..., end]"""
@@ -75,13 +87,15 @@ class Graph(object):
         pass
 
     def transitive_closure(self):
-        " Update the graph to be its transitive closure "
-        pass
-        for node in self.graph.nodes:
-            for edge in self.graph.edges:
-                if edge.start == node:
-                    pass
-
+        """Update the graph to be its transitive closure"""
+        for k in self.nodes:
+            for i in self.nodes:
+                for j in self.nodes:
+                    if self.edges[i][k] != {} and self.edges[k][j] != {}:
+                        self.edges[i][j]["start"] = i
+                        self.edges[i][j]["stop"] = j
+                        self.edges[i][j]["capacity"] = 0
+                        self.edges[i][j]["cost"] = 0
 
     def k_coloring(self, n):
         " Color the graph with n color "
