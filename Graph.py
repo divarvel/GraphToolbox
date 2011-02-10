@@ -22,6 +22,17 @@ class Graph(object):
         for edge in data["edges"]:
             self.edges[edge["start"]][edge["stop"]] = edge
 
+    def write_data(self):
+        """Build a JSON representation of the graph
+        Return JSON datas"""
+        data = {"oriented": self.directed, "nodes": self.nodes, "edges": []}
+
+        for start_line in self.edges:
+            for edge in start_line:
+                data["edges"].append(edge)
+
+        return data
+
     def shortest_path(self, start, end):
         """Find the shortest path between nodes start and end
         Returns [start, node1, node2, ..., end]"""
