@@ -10,15 +10,16 @@ class Graph(object):
 
     def load_data(self, data):
         " OOo style: load Data "
-        self.graph = data
+        self.nodes = data["nodes"]
+        self.directed = data["oriented"]
         self.edges = {}
 
-        for start in self.graph["nodes"]:
+        for start in data["nodes"]:
             self.edges[start] = {}
-            for stop in self.graph["nodes"]:
+            for stop in data["nodes"]:
                 self.edges[start][stop] = {}
 
-        for edge in self.graph["edges"]:
+        for edge in data["edges"]:
             self.edges[edge["start"]][edge["stop"]] = edge
 
     def shortest_path(self, start, end):
