@@ -11,6 +11,12 @@ class Graph(object):
     def load_data(self, data):
         " OOo style: load Data "
         self.graph = data
+        self.edges = {}
+        for edge in self.graph["edges"]:
+            self.edges[edge["start"]] = {}
+            self.edges[edge["start"]][edge["stop"]] = edge
+
+        print self.edges["id1"]["id2"]
 
     def shortest_path(self, start, end):
         """Find the shortest path between nodes start and end
