@@ -38,12 +38,14 @@ class Graph(object):
         pass
 
     def transitive_closure(self):
-        " Update the graph to be its transitive closure "
-        pass
-        for node in self.graph.nodes:
-            for edge in self.graph.edges:
-                if edge.start == node:
-                    pass
+        """Update the graph to be its transitive closure"""
+        for k in self.nodes:
+			for i in self.nodes:
+				for j in self.nodes:
+					if self.edges[i][j] != {} or\
+					   (self.edges[i][k] != {} and self.edges[k][j] != {}):
+						self.edges[i][j]["capacity"] = 0
+						self.edges[i][j]["cost"] = 0
 
 
     def k_coloring(self, n):
