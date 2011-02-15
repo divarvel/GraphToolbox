@@ -97,6 +97,35 @@ class Graph(object):
                         self.edges[i][j]["capacity"] = 0
                         self.edges[i][j]["cost"] = 0
 
-    def k_coloring(self, n):
-        " Color the graph with n color "
+    def k_coloring(self):
+        """Color the graph with n color using the Welsh & Powell algorithm"""
+        working_list = []
+        color_count = 0
+#        temp_list = []
+#        is_neighbour = 0
+#        i = 0
+        for node in self.nodes:
+            working_list.append((node, 0))
+            for test_neighbour in self.nodes:
+                if self.edges[node][test_neighbour] != {} or self.edges[test_neighbour][node] != {}:
+                    working_list[len(working_list)-1] = (working_list[len(working_list)-1][0], working_list[len(working_list)-1][1] + 1)
+        working_list = sorted(working_list, key=lambda tup: tup[1])
+        working_list.reverse()
+        while len(working_list) > 0:
+            color_count = color_count + 1
+            i = 0
+            temp_list = []
+            while i < len(working_list):
+                node = working_list[i][0]
+                is_neighbour = 0
+                for j in temp_list:
+                    if self.edges[node][j] != {} or self.edges[j][node] != {}:
+                        is_neighbour = 1
+                if is_neighbour == 1:
+                    i = i + 1
+                else:
+                    self.nodes[node]["color"] = color_count
+                    temp_list.append(node)
+                    del working_list[i]
+        print "Number of colors found:", color_count
         pass

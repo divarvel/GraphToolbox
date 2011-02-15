@@ -44,6 +44,10 @@ class GraphToolbox(object):
                 print "Transitive closure"
                 self.graph.transitive_closure()
                 self._write_graph("test.json")
+            elif action == "kcoloring":
+                print "Welsh & Powell k-coloring"
+                self.graph.k_coloring()
+                self._write_graph("test.json")
 
     def _load_graph(self, path):
         " Create a new graph from the input file "
