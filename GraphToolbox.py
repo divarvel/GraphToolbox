@@ -43,12 +43,18 @@ class GraphToolbox(object):
             elif action == "closure":
                 print "Transitive closure"
                 self.graph.transitive_closure()
+                self._write_graph("test.json")
 
     def _load_graph(self, path):
         " Create a new graph from the input file "
         self.graph = Graph()
         with open(path) as fp:
             self.graph.load_data(json.load(fp))
+
+    def _write_graph(self, path):
+        """Write the graph in a JSON file"""
+        with open(path, 'w') as fp:
+            json.dump(self.graph.write_data(), fp, indent = 4)
 
 if __name__ == '__main__':
     main = GraphToolbox()
