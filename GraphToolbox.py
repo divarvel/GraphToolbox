@@ -15,6 +15,10 @@ class GraphToolbox(object):
         parser = OptionParser()
         (options, args) = parser.parse_args()
 
+        if len(args) < 2:
+            GraphToolbox.print_help()
+            return
+
         #The first arg is the input file
         self._load_graph(args[0])
 
@@ -58,6 +62,9 @@ class GraphToolbox(object):
                 print "Welsh & Powell k-coloring"
                 print "Number of color found:", self.graph.k_coloring()
                 self._write_graph("test.json")
+            else:
+                print "Unknow action:", action
+                GraphToolbox.print_help()
 
     def _load_graph(self, path):
         " Create a new graph from the input file "
@@ -69,6 +76,14 @@ class GraphToolbox(object):
         """Write the graph in a JSON file"""
         with open(path, 'w') as fp:
             json.dump(self.graph.write_data(), fp, indent = 4)
+
+    @staticmethod
+    def print_help():
+        print "Arguments:"
+        print "    input_file action action_specific_arguments"
+        print "Actions and specific arguments:"
+        print "    [path|maxflow|maxflowmincost] start_node stop_node"
+        print "    [closure|kcoloring]"
 
 if __name__ == '__main__':
     main = GraphToolbox()
