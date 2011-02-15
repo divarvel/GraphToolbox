@@ -46,7 +46,7 @@ class GraphToolbox(object):
                 self._write_graph("test.json")
             elif action == "kcoloring":
                 print "Welsh & Powell k-coloring"
-                self.graph.k_coloring()
+                print "Number of color found:", self.graph.k_coloring()
                 self._write_graph("test.json")
 
     def _load_graph(self, path):

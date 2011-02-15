@@ -160,7 +160,8 @@ class Graph(object):
                         self.edges[i][j]["cost"] = 0
 
     def k_coloring(self):
-        """Color the graph with n color using the Welsh & Powell algorithm"""
+        """Color the graph with n color using the Welsh & Powell algorithm
+        Return color number used"""
         working_list = []
         color_count = 0
 #        temp_list = []
@@ -189,4 +190,5 @@ class Graph(object):
                     self.nodes[node]["color"] = color_count
                     temp_list.append(node)
                     del working_list[i]
-        print "Number of colors found:", color_count
+
+        return color_count
