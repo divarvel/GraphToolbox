@@ -80,11 +80,73 @@ class Graph(object):
                     if new_path != None:
                         return new_path
 
-
     def max_flow_min_cost(self, start, end):
         """Compute the maximum flow with minimum cost between nodes start and end
         Returns (maximum_flow, minimum_cost)"""
-        pass
+        "Init flow"
+        for (start, line) in self.edges:
+            for (stop, edge) in line:
+                if edge != {}:
+                    edge["flow"] = 0
+
+        "Init the loop"
+        gap = _gap_graph()
+        gap.transitive_closure()
+
+        while gap.edges[start][end] != {}:
+            "Shortest path"
+            path = gap.shortest_path(start, end)
+
+            "Min capacity"
+            min_capacity = sys.maxint
+            for i in range(len(path) - 1):
+                capacity = gap.edges[path[i]][path[i + 1]]["capacity"]
+                if capacity < min_capacity:
+                    min_capacity = capacity
+
+            "Update flow"
+            for (start, line) in self.edges:
+                for (stop, edge) in line:
+                    if edge != {}:
+                        if path.count(start) != 0 and path.count(stop) != 0:
+                            start_index = path.index(start)
+                            stop_index = path.index(stop)
+                            if stop_index - start_index == 1:
+                                edge["flow"] += min_capacity
+                            if stop_index - start_index == -1:
+                                edge["flow"] -= min_capacity
+
+            "Update loop"
+            gap = _gap_graph()
+            gap.transitive_closure()
+
+    def _gap_graph(self):
+        """Compute and return the gap graph
+        Need self's edges to have a flow value"""
+
+        "New empty ap graph"
+        gap = Graph()
+        gap.directed = True
+        gap.nodes = self.nodes
+        gap.edges = {}
+
+        for start in gap["nodes"]:
+            gap.edges[start] = {}
+            for stop in gap["nodes"]:
+                gap.edges[start][stop] = {}
+
+        "Fill the graph"
+        for (start, line) in self.edges:
+            for (stop, edge) in line:
+                if edge != {}:
+                    if edge["flow"] < edge["capacity"]:
+                        gap.edges[start][stop]["capacity"] = edge["capacity"] - edge["flow"]
+                        gap.edges[start][stop]["cost"] = edge["cost"]
+                    if edge["flow"] > 0:
+                        gap.edges[stop][start]["capacity"] = edge["flow"]
+                        gap.edges[stop][start]["cost"] = -edge["cost"]
+
+        return gap
 
     def transitive_closure(self):
         """Update the graph to be its transitive closure"""
