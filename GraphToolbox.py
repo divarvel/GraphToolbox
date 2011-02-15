@@ -2,7 +2,7 @@
 #-*- encoding: utf-8 -*-
 #
 
-import json
+import json, os
 from optparse import OptionParser
 from Graph import Graph
 
@@ -20,7 +20,11 @@ class GraphToolbox(object):
             return
 
         #The first arg is the input file
-        self._load_graph(args[0])
+        if os.path.exists(args[0]):
+            self._load_graph(args[0])
+        else:
+            print "File", args[0], "does not exist"
+            return
 
         if len(args) > 1:
             action = args[1]
