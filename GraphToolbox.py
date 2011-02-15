@@ -29,13 +29,23 @@ class GraphToolbox(object):
                 if len(args) >= 4:
                     # Maximum flow between two nodes
                     print "Compute maximum flow between %s and %s" % (args[2],
-                                                                     args[3])
+                                                                      args[3])
                     self.graph.max_flow(args[2], args[3])
 
-                    for start in self.graph.edges:
-                        for stop in self.graph.edges:
-                            edge = self.graph.edges[start][stop]
+                    for (start, line) in self.graph.edges.iteritems():
+                        for (stop, edge) in line.iteritems():
+                            if edge != {} and edge["flow"] >= 0:
+                                print "(%s %s) %s"  % (start,
+                                                       stop,
+                                                       edge["flow"])
+            elif action == "maxflowmincost":
+                if len(args) >= 4:
+                    print "Compute maximum flow with minimal cost", \
+                          "between %s and %s" % (args[2], args[3])
+                    self.graph.max_flow_min_cost(args[2], args[3])
 
+                    for (start, line) in self.graph.edges.iteritems():
+                        for (stop, edge) in line.iteritems():
                             if edge != {} and edge["flow"] >= 0:
                                 print "(%s %s) %s"  % (start,
                                                        stop,
