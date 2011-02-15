@@ -128,4 +128,3 @@ class Graph(object):
                     temp_list.append(node)
                     del working_list[i]
         print "Number of colors found:", color_count
-        pass
