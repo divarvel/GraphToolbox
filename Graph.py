@@ -5,13 +5,13 @@
 import sys
 
 class Graph(object):
-    """ A graph object, and the algos we can apply on it """
+    """A graph object, and the algos we can apply on it"""
 
     def __init__(self):
         pass
 
     def load_data(self, data):
-        " OOo style: load Data "
+        """OOo style: load Data"""
         self.nodes = data["nodes"]
         self.directed = data["oriented"]
         self.edges = {}
@@ -85,28 +85,28 @@ class Graph(object):
     def max_flow_min_cost(self, start, end):
         """Compute the maximum flow with minimum cost between nodes start and end
         Returns (maximum_flow, minimum_cost)"""
-        "Init flow"
+        # Init flow
         for (start, line) in self.edges.iteritems():
             for (stop, edge) in line.iteritems():
                 if edge != {}:
                     edge["flow"] = 0
 
-        "Init the loop"
+        # Init the loop
         gap = self._gap_graph()
         gap.transitive_closure()
 
         while gap.edges[start][end] != {}:
-            "Shortest path"
+            # Shortest path
             path = gap.shortest_path(start, end)
 
-            "Min capacity"
+            # Min capacity
             min_capacity = sys.maxint
             for i in range(len(path) - 1):
                 capacity = gap.edges[path[i]][path[i + 1]]["capacity"]
                 if capacity < min_capacity:
                     min_capacity = capacity
 
-            "Update flow"
+            # Update flow
             for (start, line) in self.edges.iteritems():
                 for (stop, edge) in line.iteritems():
                     if edge != {}:
@@ -118,7 +118,7 @@ class Graph(object):
                             if stop_index - start_index == -1:
                                 edge["flow"] -= min_capacity
 
-            "Update loop"
+            # Update loop
             gap = self._gap_graph()
             gap.transitive_closure()
 
@@ -126,7 +126,7 @@ class Graph(object):
         """Compute and return the gap graph
         Need self's edges to have a flow value"""
 
-        "New empty gap graph"
+        # New empty gap graph
         gap = Graph()
         gap.directed = True
         gap.nodes = self.nodes
@@ -137,7 +137,7 @@ class Graph(object):
             for stop in gap.nodes:
                 gap.edges[start][stop] = {}
 
-        "Fill the graph"
+        # Fill the graph
         for (start, line) in self.edges.iteritems():
             for (stop, edge) in line.iteritems():
                 if edge != {}:
