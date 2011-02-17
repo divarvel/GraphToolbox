@@ -35,12 +35,14 @@ class GraphToolbox(object):
                 path = self.graph.shortest_path(args[2], args[3])
                 print path
                 self._write_graph("result.json")
+
         elif action == "fordbellman":
             if len(args) >=4:
                 print "Shortest (Ford-Bellman) path between %s and %s" % (args[2], args[3])
                 path = self.graph.ford_bellman(args[2], args[3])
                 print path
                 self._write_graph("result.json")
+
         elif action == "maxflow":
             if len(args) >= 4: # Maximum flow between two nodes
                 print "Compute maximum flow between %s and %s" % (args[2],
