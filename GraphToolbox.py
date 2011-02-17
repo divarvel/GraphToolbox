@@ -34,11 +34,13 @@ class GraphToolbox(object):
                 print "Shortest path between %s and %s" % (args[2], args[3])
                 path = self.graph.shortest_path(args[2], args[3])
                 print path
+                self._write_graph("result.json")
         elif action == "fordbellman":
             if len(args) >=4:
                 print "Shortest (Ford-Bellman) path between %s and %s" % (args[2], args[3])
                 path = self.graph.ford_bellman(args[2], args[3])
                 print path
+                self._write_graph("result.json")
         elif action == "maxflow":
             if len(args) >= 4: # Maximum flow between two nodes
                 print "Compute maximum flow between %s and %s" % (args[2],
@@ -49,6 +51,7 @@ class GraphToolbox(object):
                     for (stop, edge) in line.iteritems():
                         if edge != {} and edge["flow"] >= 0:
                             print "(%s %s) %s"  % (start, stop, edge["flow"])
+                self._write_graph("result.json")
         elif action == "maxflowmincost": # Maximum flow with minimal cost
             if len(args) >= 4:
                 print "Compute maximum flow with minimal cost", \
@@ -59,14 +62,17 @@ class GraphToolbox(object):
                     for (stop, edge) in line.iteritems():
                         if edge != {} and edge["flow"] >= 0:
                             print "(%s %s) %s"  % (start, stop, edge["flow"])
+                self._write_graph("result.json")
         elif action == "closure": # Transitive closure
             print "Transitive closure"
             self.graph.transitive_closure()
-            self._write_graph("test.json")
+            self._write_graph("result.json")
         elif action == "kcoloring": # kcoloring of the graph
             print "Welsh & Powell k-coloring"
             print "Number of color found:", self.graph.k_coloring()
-            self._write_graph("test.json")
+            self._write_graph("result.json")
+        elif action == "dot":
+            self._write_dot("result.dot")
         else:
             print "Unknow action:", action
             GraphToolbox.print_help()
@@ -81,6 +87,12 @@ class GraphToolbox(object):
         """Write the graph in a JSON file"""
         with open(path, 'w') as fp:
             json.dump(self.graph.write_data(), fp, indent = 4)
+
+    def _write_dot(self, path):
+        """Write the graph in a dot format/file"""
+        with open(path, 'w') as fp:
+            fp.write(self.graph.to_dot())
+            fp.close()
 
     @staticmethod
     def print_help():

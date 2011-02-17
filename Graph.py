@@ -36,6 +36,37 @@ class Graph(object):
 
         return data
 
+    def to_dot(self):
+        colors = ["blue", "red", "yellow", "green", "gray", "violet"]
+        dot = "digraph result {\n"
+
+        for (node_id, node) in self.nodes.iteritems():
+            dot += node_id
+            if node.has_key("color"):
+                dot += " [style=filled, "
+                dot += "fillcolor=" + colors[node["color"] % len(colors)] + "]"
+            dot += ";\n"
+
+        for (start, line) in self.edges.iteritems():
+            for (stop, edge) in line.iteritems():
+                if edge != {}:
+                    dot += start + " -> " + stop
+                    label = ""
+
+                    if edge.has_key("cost"):
+                        label += "cost=%d\\n" % (edge["cost"],)
+                    if edge.has_key("capacity"):
+                        label += "capacity=%d\\n" % (edge["capacity"],)
+                    if edge.has_key("flow"):
+                        label += "flow=%d\\n" % (edge["flow"],)
+
+                    if label != "":
+                        dot += " [ label=\"" + label + "\" ]"
+                    dot += ";\n"
+
+        dot += "}"
+
+        return dot
 
     def shortest_path(self, start, stop):
         """Find the shortest path between nodes start and stop
