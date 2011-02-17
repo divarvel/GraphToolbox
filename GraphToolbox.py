@@ -29,10 +29,16 @@ class GraphToolbox(object):
             return
 
         action = args[1]
-        if action == "path": # Shortest path between 2 nodes
+        if action == "dijkstra": # Shortest path between 2 nodes
             if len(args) >= 4:
                 print "Shortest path between %s and %s" % (args[2], args[3])
                 path = self.graph.shortest_path(args[2], args[3])
+                print path
+        elif action == "fordbellman":
+            if len(args) >=4:
+                print "Shortest (Ford-Bellman) path between %s and %s" % (args[2], args[3])
+                path = self.graph.ford_bellman(args[2], args[3])
+                print path
         elif action == "maxflow":
             if len(args) >= 4: # Maximum flow between two nodes
                 print "Compute maximum flow between %s and %s" % (args[2],
@@ -82,7 +88,7 @@ class GraphToolbox(object):
         print "Arguments:"
         print "    input_file action action_specific_arguments"
         print "Actions and specific arguments:"
-        print "    [path|maxflow|maxflowmincost] start_node stop_node"
+        print "    [dijkstra|fordbellman|maxflow|maxflowmincost] start_node stop_node"
         print "    [closure|kcoloring]"
 
 if __name__ == '__main__':
