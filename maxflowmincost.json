@@ -1,0 +1,70 @@
+{
+    "oriented": true,
+
+    "nodes": {
+        "s": {},
+        "A": {},
+        "B": {},
+        "C": {},
+        "D": {},
+        "E": {},
+        "F": {},
+        "t": {}
+    },
+
+    "edges": [{"start": "s",
+              "stop": "A",
+              "capacity": 5,
+              "cost": 2
+              },
+              {"start": "s",
+              "stop": "B",
+              "capacity": 4,
+              "cost": 3
+              },
+              {"start": "s",
+              "stop": "C",
+              "capacity": 3,
+              "cost": 1
+              },
+              {"start": "A",
+              "stop": "D",
+              "capacity": 3,
+              "cost": 2
+              },
+              {"start": "B",
+              "stop": "E",
+              "capacity": 3,
+              "cost": 2
+              },
+              {"start": "C",
+              "stop": "F",
+              "capacity": 5,
+              "cost": 2
+              },
+              {"start": "B",
+              "stop": "F",
+              "capacity": 2,
+              "cost": 3
+              },
+              {"start": "E",
+              "stop": "F",
+              "capacity": 1,
+              "cost": 5
+              },
+              {"start": "D",
+              "stop": "t",
+              "capacity": 3,
+              "cost": 4
+              },
+              {"start": "E",
+              "stop": "t",
+              "capacity": 4,
+              "cost": 1
+              },
+              {"start": "F",
+              "stop": "t",
+              "capacity": 4,
+              "cost": 3
+              }]
+}
