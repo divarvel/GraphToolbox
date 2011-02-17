@@ -12,47 +12,47 @@
     },
 
     "edges": [{"start": "id1",
-              "stop": "id2"
+              "stop": "id2",
               "capacity": 1,
               "cost": 3
               },
               {"start": "id7",
-              "stop": "id6"
+              "stop": "id6",
               "capacity": 1,
               "cost": 2
               },
               {"start": "id2",
-              "stop": "id6"
+              "stop": "id6",
               "capacity": 1,
               "cost": 4
               },
               {"start": "id2",
-              "stop": "id5"
+              "stop": "id5",
               "capacity": 4,
               "cost": 2
               },
               {"start": "id5",
-              "stop": "id4"
+              "stop": "id4",
               "capacity": 2,
               "cost": 2
               },
               {"start": "id4",
-              "stop": "id7"
+              "stop": "id7",
               "capacity": 1,
               "cost": 3
               },
               {"start": "id7",
-              "stop": "id3"
+              "stop": "id3",
               "capacity": 5,
               "cost": 4
               },
               {"start": "id4",
-              "stop": "id6"
+              "stop": "id6",
               "capacity": 3,
               "cost": 1
               },
               {"start": "id2",
-              "stop": "id3"
+              "stop": "id3",
               "capacity": 2,
               "cost": 1
               }]
