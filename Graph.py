@@ -164,20 +164,16 @@ class Graph(object):
         """Compute the maximum flow with minimum cost between nodes start and end
         Returns (maximum_flow, minimum_cost)"""
         # Init flow
-        for (start, line) in self.edges.iteritems():
+        for (start_id, line) in self.edges.iteritems():
             for (stop, edge) in line.iteritems():
                 if edge != {}:
                     edge["flow"] = 0
 
         # Init the loop
         gap = self._gap_graph()
-        closure = self._gap_graph()
-        closure.transitive_closure()
+        path = gap.ford_bellman(start, end)
 
-        while closure.edges[start][end] != {}:
-            # Shortest path
-            path = gap.ford_bellman(start, end)
-
+        while path != []:
             # Min capacity
             min_capacity = sys.maxint
             for i in range(len(path) - 1):
@@ -186,11 +182,11 @@ class Graph(object):
                     min_capacity = capacity
 
             # Update flow
-            for (start, line) in self.edges.iteritems():
+            for (start_id, line) in self.edges.iteritems():
                 for (stop, edge) in line.iteritems():
                     if edge != {}:
-                        if path.count(start) != 0 and path.count(stop) != 0:
-                            start_index = path.index(start)
+                        if path.count(start_id) != 0 and path.count(stop) != 0:
+                            start_index = path.index(start_id)
                             stop_index = path.index(stop)
                             if stop_index - start_index == 1:
                                 edge["flow"] += min_capacity
@@ -199,8 +195,7 @@ class Graph(object):
 
             # Update loop
             gap = self._gap_graph()
-            closure = self._gap_graph()
-            closure.transitive_closure()
+            path = gap.ford_bellman(start, end)
 
     def _gap_graph(self):
         """Compute and return the gap graph
@@ -270,7 +265,10 @@ class Graph(object):
         # Retrieve path
         path = [stop]
         while path[0] != start:
-            path.insert(0, self.nodes[path[0]]["pred"])
+            if self.nodes[path[0]]["pred"] != "":
+                path.insert(0, self.nodes[path[0]]["pred"])
+            else:
+                return []
 
         return path
 
