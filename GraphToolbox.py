@@ -33,6 +33,7 @@ class GraphToolbox(object):
             if len(args) >= 4:
                 print "Shortest path between %s and %s" % (args[2], args[3])
                 path = self.graph.shortest_path(args[2], args[3])
+                print path
         elif action == "maxflow":
             if len(args) >= 4: # Maximum flow between two nodes
                 print "Compute maximum flow between %s and %s" % (args[2],

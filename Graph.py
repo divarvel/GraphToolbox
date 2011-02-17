@@ -44,28 +44,28 @@ class Graph(object):
         #Initialization
         T = []
         self.nodes[start]["dynamicCost"] = 0
-        
-     
+
+
 
         for node_id in self.nodes:
             T.append(node_id)
             #self.nodes[node_id]["dynamicPred"]=start
             boolean = 0
             if self.edges[start][node_id] != {} and node_id != start:
-                self.nodes[node_id]["dynamicCost"]=self.edges[start][node_id]["cost"]            
+                self.nodes[node_id]["dynamicCost"]=self.edges[start][node_id]["cost"]
                 boolean = 1
                 continue
             if boolean == 0 and node_id != start:
                 self.nodes[node_id]["dynamicCost"] = sys.maxint
-            
+
         #Main Loop
         while len(T) != 0:
-            
+
             minimum_id = T[0]
             for node_id in T:
                 if self.nodes[minimum_id]["dynamicCost"] > self.nodes[node_id]["dynamicCost"]:
                     minimum_id = node_id
-            
+
 
             for node_id in self.nodes:
                     if self.edges[minimum_id][node_id] != {} and self.nodes[node_id]["dynamicCost"] >= self.nodes[minimum_id]["dynamicCost"]+self.edges[minimum_id][node_id]["cost"]:
@@ -78,8 +78,8 @@ class Graph(object):
         try:
             while finalnode_id!=start:
                 result.insert(0,finalnode_id)
-                finalnode_id = self.nodes[finalnode_id]["dynamicPred"]    
-            result.insert(0,start)        
+                finalnode_id = self.nodes[finalnode_id]["dynamicPred"]
+            result.insert(0,start)
         except KeyError:
             result=[]
             print("There is no path between " + start + " and " + stop)
