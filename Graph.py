@@ -36,10 +36,57 @@ class Graph(object):
 
         return data
 
+
     def shortest_path(self, start, stop):
         """Find the shortest path between nodes start and stop
         Returns [start, node1, node2, ..., stop]"""
-        return [start, stop]
+
+        #Initialization
+        T = []
+        self.nodes[start]["dynamicCost"] = 0
+        
+     
+
+        for node_id in self.nodes:
+            T.append(node_id)
+            #self.nodes[node_id]["dynamicPred"]=start
+            boolean = 0
+            if self.edges[start][node_id] != {} and node_id != start:
+                self.nodes[node_id]["dynamicCost"]=self.edges[start][node_id]["cost"]            
+                boolean = 1
+                continue
+            if boolean == 0 and node_id != start:
+                self.nodes[node_id]["dynamicCost"] = sys.maxint
+            
+        #Main Loop
+        while len(T) != 0:
+            
+            minimum_id = T[0]
+            for node_id in T:
+                if self.nodes[minimum_id]["dynamicCost"] > self.nodes[node_id]["dynamicCost"]:
+                    minimum_id = node_id
+            
+
+            for node_id in self.nodes:
+                    if self.edges[minimum_id][node_id] != {} and self.nodes[node_id]["dynamicCost"] >= self.nodes[minimum_id]["dynamicCost"]+self.edges[minimum_id][node_id]["cost"]:
+                        self.nodes[node_id]["dynamicCost"] = self.nodes[minimum_id]["dynamicCost"] + self.edges[minimum_id][node_id]["cost"]
+                        self.nodes[node_id]["dynamicPred"] = minimum_id
+            T.remove(minimum_id)
+        #Computation of the result list of nodes, from stop to start
+        finalnode_id = stop
+        result = []
+        try:
+            while finalnode_id!=start:
+                result.insert(0,finalnode_id)
+                finalnode_id = self.nodes[finalnode_id]["dynamicPred"]    
+            result.insert(0,start)        
+        except KeyError:
+            result=[]
+            print("There is no path between " + start + " and " + stop)
+
+        return result
+
+
 
     def max_flow(self, start, stop):
         """Compute the maximum flow between nodes start and end
@@ -158,8 +205,6 @@ class Graph(object):
                     if self.edges[i][k] != {} and self.edges[k][j] != {}:
                         self.edges[i][j]["start"] = i
                         self.edges[i][j]["stop"] = j
-                        self.edges[i][j]["capacity"] = 0
-                        self.edges[i][j]["cost"] = 0
 
     def k_coloring(self):
         """Color the graph with n color using the Welsh & Powell algorithm
