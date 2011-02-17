@@ -2,7 +2,7 @@
 #-*- encoding: utf-8 -*-
 #
 
-import sys
+import sys, json
 
 class Graph(object):
     """A graph object, and the algos we can apply on it"""
@@ -140,11 +140,12 @@ class Graph(object):
 
         # Init the loop
         gap = self._gap_graph()
-        gap.transitive_closure()
+        closure = self._gap_graph()
+        closure.transitive_closure()
 
-        while gap.edges[start][end] != {}:
+        while closure.edges[start][end] != {}:
             # Shortest path
-            path = gap.shortest_path(start, end)
+            path = gap.ford_bellman(start, end)
 
             # Min capacity
             min_capacity = sys.maxint
@@ -167,7 +168,8 @@ class Graph(object):
 
             # Update loop
             gap = self._gap_graph()
-            gap.transitive_closure()
+            closure = self._gap_graph()
+            closure.transitive_closure()
 
     def _gap_graph(self):
         """Compute and return the gap graph
@@ -176,9 +178,11 @@ class Graph(object):
         # New empty gap graph
         gap = Graph()
         gap.directed = True
-        gap.nodes = self.nodes
-        gap.edges = {}
+        gap.nodes = {}
+        for node in self.nodes:
+            gap.nodes[node] = {}
 
+        gap.edges = {}
         for start in gap.nodes:
             gap.edges[start] = {}
             for stop in gap.nodes:
@@ -189,13 +193,55 @@ class Graph(object):
             for (stop, edge) in line.iteritems():
                 if edge != {}:
                     if edge["flow"] < edge["capacity"]:
+                        gap.edges[start][stop]["start"] = start
+                        gap.edges[start][stop]["stop"] = stop
                         gap.edges[start][stop]["capacity"] = edge["capacity"] - edge["flow"]
                         gap.edges[start][stop]["cost"] = edge["cost"]
                     if edge["flow"] > 0:
+                        gap.edges[stop][start]["start"] = stop
+                        gap.edges[stop][start]["stop"] = start
                         gap.edges[stop][start]["capacity"] = edge["flow"]
                         gap.edges[stop][start]["cost"] = -edge["cost"]
 
         return gap
+
+    def ford_bellman(self, start, stop):
+        """Shortest path with Ford-Bellman algorithm
+        Return [start, node1, node2, ..., stop]"""
+        # Init
+        for (node_name, node) in self.nodes.iteritems():
+            node["pred"] = ""
+            if node_name == start:
+                node["cost"] = 0
+            else:
+                node["cost"] = sys.maxint
+
+        # Update
+        for i in range(len(self.nodes)):
+            for (begin, line) in self.edges.iteritems():
+                for (end, edge) in line.iteritems():
+                    if edge != {}:
+                        begin_node = self.nodes[begin]
+                        end_node = self.nodes[end]
+                        if begin_node["cost"] + edge["cost"] < end_node["cost"]:
+                            end_node["cost"] = begin_node["cost"] + edge["cost"]
+                            end_node["pred"] = begin
+
+        # Check for negative cycles
+        for (begin, line) in self.edges.iteritems():
+            for (end, edge) in line.iteritems():
+                if edge != {}:
+                    begin_node = self.nodes[begin]
+                    end_node = self.nodes[end]
+                    if begin_node["cost"] + edge["cost"] < end_node["cost"]:
+                        return []
+
+        # Retrieve path
+        path = [stop]
+        while path[0] != start:
+            path.insert(0, self.nodes[path[0]]["pred"])
+
+        return path
 
     def transitive_closure(self):
         """Update the graph to be its transitive closure"""
