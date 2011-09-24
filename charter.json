@@ -1,0 +1,214 @@
+{
+    "oriented": true,
+
+    "nodes": {
+        "s": {},
+        "Aj": {},
+        "Aj_": {},
+        "Av": {},
+        "Av_": {},
+        "As": {},
+        "As_": {},
+        "Bj": {},
+        "Bj_": {},
+        "Bv": {},
+        "Bv_": {},
+        "Bs": {},
+        "Bs_": {},
+        "Cj": {},
+        "Cj_": {},
+        "Cv": {},
+        "Cv_": {},
+        "Cs": {},
+        "Cs_": {},
+        "Fj": {},
+        "Fj_": {},
+        "Fv": {},
+        "Fv_": {},
+        "Fs": {},
+        "Fs_": {}
+    },
+
+    "edges": [
+              {"start": "s",
+              "stop": "Aj",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "s",
+              "stop": "Bj",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "s",
+              "stop": "Cj",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Aj",
+              "stop": "Aj_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Aj_",
+              "stop": "Av",
+              "capacity": 30,
+              "cost": 1
+              },
+              {"start": "Av",
+              "stop": "Av_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Av_",
+              "stop": "As",
+              "capacity": 15,
+              "cost": 1
+              },
+              {"start": "As",
+              "stop": "As_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Bj",
+              "stop": "Bj_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Bj_",
+              "stop": "Bv",
+              "capacity": 50,
+              "cost": 1
+              },
+              {"start": "Bv",
+              "stop": "Bv_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Bv_",
+              "stop": "Bs",
+              "capacity": 55,
+              "cost": 1
+              },
+              {"start": "Bs",
+              "stop": "Bs_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Cj",
+              "stop": "Cj_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Cj_",
+              "stop": "Cv",
+              "capacity": 40,
+              "cost": 1
+              },
+              {"start": "Cv",
+              "stop": "Cv_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Cv_",
+              "stop": "Cs",
+              "capacity": 40,
+              "cost": 1
+              },
+              {"start": "Cs",
+              "stop": "Cs_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Fj",
+              "stop": "Fj_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Fj_",
+              "stop": "Fv",
+              "capacity": 25,
+              "cost": 1
+              },
+              {"start": "Fv",
+              "stop": "Fv_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Fv_",
+              "stop": "Fs",
+              "capacity": 40,
+              "cost": 1
+              },
+              {"start": "Fs",
+              "stop": "Fs_",
+              "capacity": 100,
+              "cost": 1
+              },
+              {"start": "Aj",
+              "stop": "Bj_",
+              "capacity": 10,
+              "cost": 1
+              },
+              {"start": "Bj",
+              "stop": "Cj_",
+              "capacity": 30,
+              "cost": 1
+              },
+              {"start": "Cj",
+              "stop": "Fj_",
+              "capacity": 20,
+              "cost": 1
+              },
+              {"start": "Av",
+              "stop": "Bv_",
+              "capacity": 10,
+              "cost": 1
+              },
+              {"start": "Bv",
+              "stop": "Cv_",
+              "capacity": 30,
+              "cost": 1
+              },
+              {"start": "Cv",
+              "stop": "Fv_",
+              "capacity": 20,
+              "cost": 1
+              },
+              {"start": "Cs",
+              "stop": "Fs_",
+              "capacity": 40,
+              "cost": 1
+              },
+              {"start": "Aj",
+              "stop": "Fj_",
+              "capacity": 20,
+              "cost": 1
+              },
+              {"start": "Bj",
+              "stop": "Fj_",
+              "capacity": 30,
+              "cost": 1
+              },
+              {"start": "Av",
+              "stop": "Fv_",
+              "capacity": 20,
+              "cost": 1
+              },
+              {"start": "Bv",
+              "stop": "Fv_",
+              "capacity": 20,
+              "cost": 1
+              },
+              {"start": "As",
+              "stop": "Fs_",
+              "capacity": 25,
+              "cost": 1
+              },
+              {"start": "Bs",
+              "stop": "Fs_",
+              "capacity": 65,
+              "cost": 1
+              }
+             ]
+}

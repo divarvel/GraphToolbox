@@ -1,0 +1,53 @@
+{
+    "oriented": true,
+
+    "nodes": {
+        "id1": {},
+        "id2": {},
+        "id3": {},
+        "id4": {},
+        "id5": {},
+        "id6": {}
+    },
+
+    "edges": [{"start": "id1",
+              "stop": "id2",
+              "cost": 3
+              },
+              {"start": "id1",
+              "stop": "id3",
+              "cost": 6
+              },
+              {"start": "id1",
+              "stop": "id5",
+              "cost": 3
+              },
+              {"start": "id2",
+              "stop": "id3",
+              "cost": 3
+              },
+              {"start": "id2",
+              "stop": "id4",
+              "cost": 6
+              },
+              {"start": "id3",
+              "stop": "id4",
+              "cost": 1
+              },
+              {"start": "id4",
+              "stop": "id5",
+              "cost": 6
+              },
+              {"start": "id6",
+              "stop": "id4",
+              "cost": 1
+              },
+              {"start": "id5",
+              "stop": "id3",
+              "cost": 2
+              },
+              {"start": "id6",
+              "stop": "id4",
+              "cost": 5
+              }]
+}
